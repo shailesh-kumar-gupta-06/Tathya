@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TATHYA (तथ्य) — Zero-Guessing Document AI</title>
+<style>
+:root{--bg:#F8FAFC;--fg:#0F172A;--bd:#E2E8F0;--mut:#64748B;--card:#fff;--ok:#059669;--okbg:#ECFDF5;--warn:#D97706;--warnbg:#FFFBEB;--bad:#DC2626;--badbg:#FEF2F2;--info:#4F46E5;--infobg:#EEF2FF}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Devanagari",sans-serif;background:var(--bg);color:var(--fg);display:flex;overflow:hidden;font-size:15px}
+button{font:inherit;cursor:pointer;color:inherit}
+/* sidebar */
+#sidebar{width:260px;flex:none;background:#fff;border-right:1px solid var(--bd);display:flex;flex-direction:column;transition:margin .25s}
+#sidebar.closed{margin-left:-260px}
+.brand{padding:18px 16px 10px}
+.brand b{font-size:20px;letter-spacing:.5px}.brand small{display:block;color:var(--mut);margin-top:2px}
+#newChat{margin:6px 16px 10px;padding:10px;border:1px solid var(--bd);border-radius:10px;background:#fff;font-weight:600}
+#newChat:hover{background:var(--bg)}
+.sec{padding:8px 16px;font-size:12px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+#docs{flex:1;overflow:auto;padding:0 8px}
+.doc{display:flex;align-items:center;gap:8px;padding:8px;border-radius:8px}
+.doc:hover{background:var(--bg)}
+.doc .n{flex:1;min-width:0}.doc .n div:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:13.5px}
+.doc .n div:last-child{font-size:12px;color:var(--ok)}.doc .n div.pend{color:var(--warn)}
+.doc button{border:0;background:none;color:var(--mut);font-size:18px;line-height:1}.doc button:hover{color:var(--bad)}
+.empty{color:var(--mut);font-size:13px;padding:8px}
+.be{border-top:1px solid var(--bd);padding:10px 16px;font-size:12px}
+.be summary{cursor:pointer;color:var(--mut);display:flex;align-items:center;gap:6px;list-style:none}
+.dot{width:9px;height:9px;border-radius:50%;background:#94A3B8;display:inline-block}.dot.on{background:#10B981}.dot.off{background:#EF4444}
+.be input{width:100%;margin-top:8px;padding:7px 9px;border:1px solid var(--bd);border-radius:8px;font:inherit;font-size:12.5px}
+/* main */
+#main{flex:1;display:flex;flex-direction:column;min-width:0;position:relative}
+#top{display:flex;align-items:center;gap:10px;padding:10px 16px;border-bottom:1px solid var(--bd);background:rgba(248,250,252,.9)}
+#top .tg{border:0;background:none;font-size:20px;padding:2px 8px}
+.badge{font-size:12px;border:1px solid var(--bd);background:#fff;border-radius:99px;padding:4px 10px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sp{flex:1}
+.lang{display:flex;border:1px solid var(--bd);border-radius:99px;background:#fff;overflow:hidden}
+.lang button{border:0;background:none;padding:5px 12px;font-size:13px}.lang button.a{background:var(--fg);color:#fff}
+#scroll{flex:1;overflow-y:auto;scroll-behavior:smooth}
+#chat{max-width:820px;margin:0 auto;padding:24px 16px 12px;min-height:100%}
+#welcome{text-align:center;padding-top:12vh}
+#welcome h1{font-size:30px;margin:0 0 6px;font-weight:600}
+#welcome p{color:var(--mut);margin:0 0 26px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.chip{border:1px solid var(--bd);background:#fff;border-radius:14px;padding:12px 16px;font-size:14px;max-width:230px;text-align:left}
+.chip:hover{background:var(--infobg);border-color:#C7D2FE}
+.msg{display:flex;margin:18px 0;gap:12px}
+.msg.user{justify-content:flex-end}
+.bub{background:#E8EEF7;border-radius:18px 18px 4px 18px;padding:10px 16px;max-width:80%;white-space:pre-wrap;word-wrap:break-word}
+.av{width:30px;height:30px;border-radius:50%;background:var(--fg);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;flex:none;font-weight:700}
+.ai{flex:1;min-width:0}
+.sys{text-align:center;margin:14px 0}
+.sys span{display:inline-block;font-size:13px;border-radius:99px;padding:6px 14px;background:var(--okbg);color:var(--ok);border:1px solid #A7F3D0}
+.sys span.err{background:var(--badbg);color:var(--bad);border-color:#FECACA;border-radius:12px;text-align:left;max-width:90%}
+.sys span.load{background:var(--infobg);color:var(--info);border-color:#C7D2FE}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:r .7s linear infinite;vertical-align:-2px;margin-right:6px}
+@keyframes r{to{transform:rotate(360deg)}}
+.pill{display:inline-block;font-size:12.5px;font-weight:600;border-radius:99px;padding:3px 11px;margin-bottom:10px}
+.pill.g{background:var(--okbg);color:var(--ok)}.pill.a{background:var(--warnbg);color:var(--warn)}.pill.r{background:var(--badbg);color:var(--bad)}
+.card{border-radius:12px;padding:12px 14px;margin:10px 0;border:1px solid;font-size:14px}
+.card h4{margin:0 0 6px;font-size:14px}
+.card.abs{background:var(--warnbg);border-color:#FDE68A}
+.card.amd{background:var(--infobg);border-color:#C7D2FE}
+.card.con{background:#fff;border:2px solid #FCA5A5}.card.con h4{color:var(--bad)}
+.card ul{margin:6px 0 0;padding-left:20px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px}
+.grid>div{background:var(--badbg);border-radius:8px;padding:8px 10px;font-size:13px}
+.grid b{display:block;font-size:12px;color:var(--bad);margin-bottom:3px}.grid i{color:#334155}
+.claim{margin:8px 0;line-height:1.6}
+.cite{display:inline-block;margin-left:6px;font-size:12px;border:1px solid #A7F3D0;background:var(--okbg);color:var(--ok);border-radius:99px;padding:1px 9px;cursor:pointer;white-space:nowrap;vertical-align:1px}
+.cite:hover{background:#D1FAE5}
+.math{background:#F1F5F9;border:1px solid var(--bd);border-radius:10px;padding:10px 12px;font:13px/1.55 ui-monospace,Menlo,Consolas,monospace;white-space:pre-wrap;margin:10px 0}
+.math h4{font-family:inherit;margin:0 0 4px;font-size:12px;color:var(--mut)}
+/* input */
+#bar{max-width:820px;width:100%;margin:0 auto;padding:6px 16px 8px}
+#box{display:flex;align-items:flex-end;gap:6px;background:#fff;border:1px solid var(--bd);border-radius:26px;padding:8px 10px;box-shadow:0 2px 10px rgba(15,23,42,.06)}
+#box:focus-within{border-color:#94A3B8}
+#box button{border:0;background:none;font-size:20px;width:38px;height:38px;border-radius:50%;flex:none}
+#attach:hover{background:var(--bg)}
+#send{background:var(--fg)!important;color:#fff;font-size:18px!important}#send:disabled{background:#CBD5E1!important;cursor:not-allowed}
+#q{flex:1;border:0;outline:0;resize:none;font:inherit;max-height:180px;padding:9px 4px;background:none;line-height:1.4}
+.foot{text-align:center;font-size:11.5px;color:var(--mut);margin-top:6px}
+#drop{position:absolute;inset:0;background:rgba(238,242,255,.92);border:3px dashed var(--info);display:none;align-items:center;justify-content:center;font-size:20px;color:var(--info);z-index:30;margin:8px;border-radius:16px}
+#drop.on{display:flex}
+/* drawer */
+#drawer{position:fixed;top:0;right:0;height:100%;width:min(560px,100vw);background:#fff;border-left:1px solid var(--bd);box-shadow:-8px 0 30px rgba(15,23,42,.12);transform:translateX(100%);transition:transform .3s;z-index:40;display:flex;flex-direction:column}
+#drawer.open{transform:none}
+#drawer header{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid var(--bd);gap:8px}
+#drawer header b{flex:1;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#drawer header button{border:0;background:none;font-size:24px;line-height:1}
+#dbody{flex:1;overflow:auto;padding:16px}
+#dquote{background:var(--okbg);border-left:4px solid var(--ok);padding:10px 12px;border-radius:6px;font-size:14px;margin-bottom:14px}
+#dimg{width:100%;border:1px solid var(--bd);border-radius:8px;display:none}
+#dstate{color:var(--mut);font-size:14px;text-align:center;padding:24px}
+@media(max-width:760px){#sidebar{position:fixed;z-index:20;height:100%}.grid{grid-template-columns:1fr}.badge{display:none}}
+</style>
+</head>
+<body>
+<aside id="sidebar">
+  <div class="brand"><b>TATHYA (तथ्य)</b><small>Fact-Checked Document AI</small></div>
+  <button id="newChat">+ New Chat</button>
+  <div class="sec">Uploaded Knowledge Base</div>
+  <div id="docs"></div>
+  <details class="be" id="beBox">
+    <summary><span class="dot" id="dot"></span><span id="beLabel">Backend: checking…</span></summary>
+    <input id="api" value="http://localhost:8000" spellcheck="false" aria-label="Backend URL">
+  </details>
+</aside>
+
+<section id="main">
+  <div id="top">
+    <button class="tg" id="toggle" title="Toggle sidebar">☰</button>
+    <span class="badge">100% Open-Source • Qwen 2.5 + DeBERTa NLI</span>
+    <span class="sp"></span>
+    <div class="lang" role="group" aria-label="Language"><button id="lEn" class="a">English</button><button id="lHi">हिन्दी</button></div>
+  </div>
+  <div id="scroll"><div id="chat">
+    <div id="welcome">
+      <h1 id="wTitle">Ask Tathya anything about your documents</h1>
+      <p id="wSub">Every answer is verified against your PDFs — or blocked.</p>
+      <div class="chips" id="chips"></div>
+    </div>
+  </div></div>
+  <div id="bar">
+    <div id="box">
+      <button id="attach" title="Upload PDF">📎</button>
+      <textarea id="q" rows="1" placeholder="Ask a question from your uploaded PDFs..."></textarea>
+      <button id="send" title="Send" disabled>↑</button>
+    </div>
+    <div class="foot">Tathya answers only from your documents and never guesses.</div>
+  </div>
+  <div id="drop">📄 Drop PDF files to upload</div>
+  <input type="file" id="file" accept="application/pdf,.pdf" multiple hidden>
+</section>
+
+<aside id="drawer" aria-hidden="true">
+  <header><b id="dtitle">Proof</b><button id="dclose" title="Close">×</button></header>
+  <div id="dbody">
+    <div id="dquote"></div>
+    <div id="dstate"></div>
+    <img id="dimg" alt="Highlighted PDF page">
+  </div>
+</aside>
+
+<script>
+(()=>{
+const $=s=>document.querySelector(s);
+const state={lang:'en',docs:JSON.parse(localStorage.getItem('tathya_docs')||'[]'),busy:false};
+const apiEl=$('#api');apiEl.value=localStorage.getItem('tathya_api')||apiEl.value;
+const API=()=>apiEl.value.trim().replace(/\/+$/,'');
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+const T={en:{title:'Ask Tathya anything about your documents',sub:'Every answer is verified against your PDFs — or blocked.',ph:'Ask a question from your uploaded PDFs...',
+  chips:[['Check latest amended rule','What is the latest amended rule, and which document supersedes the older one?'],['Find contradictions across files','Find any contradictions across my uploaded documents.'],['Calculate penalty from fee table','Calculate the penalty using the fee table in the documents.'],['Test out-of-context question','Who won the 1998 FIFA World Cup?']],
+  verifying:'Verifying clauses & checking contradictions...'},
+ hi:{title:'अपने दस्तावेज़ों के बारे में तथ्य से कुछ भी पूछें',sub:'हर उत्तर आपके PDF से सत्यापित होता है — या रोक दिया जाता है।',ph:'अपने अपलोड किए PDF से प्रश्न पूछें...',
+  chips:[['नवीनतम संशोधित नियम जाँचें','नवीनतम संशोधित नियम क्या है और कौन सा दस्तावेज़ पुराने को बदलता है?'],['फ़ाइलों में विरोधाभास खोजें','मेरे अपलोड किए दस्तावेज़ों में विरोधाभास खोजें।'],['फ़ीस तालिका से जुर्माना निकालें','दस्तावेज़ों की फ़ीस तालिका से जुर्माना निकालें।'],['अप्रासंगिक प्रश्न परखें','1998 फ़ीफ़ा विश्व कप किसने जीता?']],
+  verifying:'खंडों का सत्यापन और विरोधाभासों की जाँच हो रही है...'}};
+
+function applyLang(){
+  const t=T[state.lang];
+  $('#wTitle').textContent=t.title;$('#wSub').textContent=t.sub;$('#q').placeholder=t.ph;
+  $('#chips').innerHTML=t.chips.map((c,i)=>`<button class="chip" data-i="${i}">${esc(c[0])}</button>`).join('');
+  $('#lEn').classList.toggle('a',state.lang==='en');$('#lHi').classList.toggle('a',state.lang==='hi');
+}
+$('#chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;ask(T[state.lang].chips[b.dataset.i][1])});
+$('#lEn').onclick=()=>{state.lang='en';applyLang()};
+$('#lHi').onclick=()=>{state.lang='hi';applyLang()};
+$('#toggle').onclick=()=>$('#sidebar').classList.toggle('closed');
+if(innerWidth<760)$('#sidebar').classList.add('closed');
+
+/* backend status */
+async function ping(){
+  localStorage.setItem('tathya_api',API());
+  const d=$('#dot'),l=$('#beLabel');
+  try{const c=new AbortController();setTimeout(()=>c.abort(),4000);await fetch(API()+'/',{signal:c.signal});d.className='dot on';l.textContent='Backend connected'}
+  catch{d.className='dot off';l.textContent='Backend offline'}
+}
+apiEl.addEventListener('change',ping);ping();setInterval(ping,20000);
+
+/* docs list */
+function saveDocs(){localStorage.setItem('tathya_docs',JSON.stringify(state.docs.filter(d=>!d.pending)))}
+function renderDocs(){
+  $('#docs').innerHTML=state.docs.length?state.docs.map((d,i)=>`<div class="doc"><span>📄</span><div class="n"><div title="${esc(d.name)}">${esc(d.name)}</div><div class="${d.pending?'pend':''}">${d.pending?'<span class="spin"></span>Indexing…':'✓ Indexed'+(d.pages?` • ${d.pages} pg`:'')}</div></div>${d.pending?'':`<button data-i="${i}" title="Remove">×</button>`}</div>`).join(''):'<div class="empty">No PDFs yet. Click 📎 or drop a file.</div>';
+}
+$('#docs').addEventListener('click',async e=>{
+  const b=e.target.closest('button');if(!b)return;const d=state.docs[b.dataset.i];
+  // best-effort backend delete; always remove from list
+  try{await fetch(`${API()}/documents/${encodeURIComponent(d.name)}`,{method:'DELETE'})}catch{}
+  state.docs.splice(b.dataset.i,1);saveDocs();renderDocs();
+});
+
+/* chat helpers */
+const chat=$('#chat'),scroller=$('#scroll');
+const bottom=()=>scroller.scrollTo({top:scroller.scrollHeight});
+function hideWelcome(){const w=$('#welcome');if(w)w.remove()}
+function add(html,cls){hideWelcome();const d=document.createElement('div');d.className=cls;d.innerHTML=html;chat.appendChild(d);bottom();return d}
+const sys=(txt,kind='')=>add(`<span class="${kind}">${txt}</span>`,'sys');
+
+$('#newChat').onclick=()=>{chat.innerHTML=`<div id="welcome"><h1 id="wTitle"></h1><p id="wSub"></p><div class="chips" id="chips"></div></div>`;
+  $('#chips').addEventListener('click',e=>{const b=e.target.closest('.chip');if(b)ask(T[state.lang].chips[b.dataset.i][1])});applyLang();closeDrawer()};
+
+/* upload */
+$('#attach').onclick=()=>$('#file').click();
+$('#file').onchange=e=>{uploadFiles([...e.target.files]);e.target.value=''};
+async function uploadFiles(files){
+  files=files.filter(f=>/\.pdf$/i.test(f.name)||f.type==='application/pdf');
+  if(!files.length){sys('Please choose PDF files only.','err');return}
+  for(const f of files){
+    const entry={name:f.name,pending:true};state.docs.push(entry);renderDocs();
+    const note=sys(`<span class="spin"></span>Uploading &amp; indexing ${esc(f.name)}...`,'load');
+    try{
+      const fd=new FormData();fd.append('file',f);
+      const r=await fetch(API()+'/upload',{method:'POST',body:fd});
+      if(!r.ok)throw new Error('HTTP '+r.status+' '+(await r.text().catch(()=>'')).slice(0,200));
+      const j=await r.json().catch(()=>({}));
+      const pages=j.pages??j.page_count??j.num_pages??j.total_pages??'';
+      entry.pending=false;entry.pages=pages;entry.name=j.filename||j.doc_name||f.name;saveDocs();renderDocs();
+      note.innerHTML=`<span>✓ ${esc(entry.name)} uploaded and indexed${pages?` (${esc(pages)} pages)`:''}. You can now ask questions about it.</span>`;
+      ping();
+    }catch(err){
+      state.docs.splice(state.docs.indexOf(entry),1);renderDocs();
+      const offline=err instanceof TypeError;
+      note.innerHTML=`<span class="err">${offline?`⚠️ Cannot reach the FastAPI server at <b>${esc(API())}</b>. It appears to be offline. Start it with <code>uvicorn main:app --reload --port 8000</code> and make sure CORS is enabled, then try again.`:`⚠️ Upload failed for ${esc(f.name)}: ${esc(err.message)}`}</span>`;
+      ping();
+    }
+  }
+}
+/* drag & drop */
+let dc=0;const main=$('#main'),drop=$('#drop');
+main.addEventListener('dragenter',e=>{if(e.dataTransfer?.types?.includes('Files')){dc++;drop.classList.add('on')}});
+main.addEventListener('dragleave',()=>{if(--dc<=0){dc=0;drop.classList.remove('on')}});
+main.addEventListener('dragover',e=>e.preventDefault());
+main.addEventListener('drop',e=>{e.preventDefault();dc=0;drop.classList.remove('on');uploadFiles([...e.dataTransfer.files])});
+
+/* input */
+const q=$('#q'),send=$('#send');
+q.addEventListener('input',()=>{q.style.height='auto';q.style.height=Math.min(q.scrollHeight,180)+'px';send.disabled=!q.value.trim()||state.busy});
+q.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();submit()}});
+send.onclick=submit;
+function submit(){const v=q.value.trim();if(!v||state.busy)return;q.value='';q.style.height='auto';ask(v)}
+
+/* ask */
+async function ask(question){
+  if(state.busy)return;state.busy=true;send.disabled=true;
+  add(`<div class="bub">${esc(question)}</div>`,'msg user');
+  const typing=add(`<div class="av">त</div><div class="ai"><span class="spin"></span><span style="color:var(--mut)">${esc(T[state.lang].verifying)}</span></div>`,'msg');
+  try{
+    const r=await fetch(`${API()}/ask?query=${encodeURIComponent(question)}&language=${state.lang}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query:question,language:state.lang})});
+    if(!r.ok)throw new Error('HTTP '+r.status+' '+(await r.text().catch(()=>'')).slice(0,300));
+    const data=await r.json();
+    typing.querySelector('.ai').innerHTML=render(data);
+  }catch(err){
+    const offline=err instanceof TypeError;
+    typing.querySelector('.ai').innerHTML=`<div class="card abs" style="background:var(--badbg);border-color:#FECACA"><h4>⚠️ ${offline?'Backend unreachable':'Request failed'}</h4>${offline?`The FastAPI server at <b>${esc(API())}</b> is offline (or blocked by CORS). Start it and check the Backend URL in the sidebar.`:esc(err.message)}</div>`;
+    ping();
+  }
+  state.busy=false;send.disabled=!q.value.trim();bottom();
+}
+
+/* render AI response */
+let citeStore=[];
+function render(d){
+  citeStore=citeStore.slice(-200);
+  const abst=d.abstained===true;
+  let f=d.faithfulness??d.faithfulness_score??d.score;
+  if(f==null)f=abst?0:100;f=Number(f);if(f<=1&&f>=0&&!Number.isInteger(f)||f===1&&d.faithfulness<=1)f*=100;
+  if(abst)f=0;f=Math.round(f);
+  const cls=abst||f<50?'r':f>=80?'g':'a';
+  let h=`<span class="pill ${cls}">🛡️ Faithfulness: ${f}%</span>`;
+  if(abst){
+    const mi=d.missing_info;
+    h+=`<div class="card abs"><h4>⚠️ Insufficient Proof — Answer Blocked</h4>${esc(d.message||'The documents do not contain enough verified evidence to answer this.')}${
+      mi&&(Array.isArray(mi)?mi.length:true)?`<div style="margin-top:8px"><b>Missing information:</b><ul>${(Array.isArray(mi)?mi:[mi]).map(x=>`<li>${esc(typeof x==='object'?JSON.stringify(x):x)}</li>`).join('')}</ul></div>`:''}</div>`;
+  }
+  if(d.amendment_note){
+    const a=d.amendment_note;const txt=typeof a==='object'?(a.explanation||a.note||JSON.stringify(a)):a;
+    h+=`<div class="card amd"><h4>🔄 Rule Amendment Detected</h4>${esc(txt)}</div>`;
+  }
+  if(Array.isArray(d.contradictions)&&d.contradictions.length){
+    h+=d.contradictions.map(c=>`<div class="card con"><h4>⚡ Conflict Detected Between Documents</h4>${c.explanation?`<div style="margin-bottom:4px">${esc(c.explanation)}</div>`:''}<div class="grid"><div><b>${esc(c.doc_a)}${c.page_a?' • Pg '+esc(c.page_a):''}</b><i>“${esc(c.quote_a)}”</i></div><div><b>${esc(c.doc_b)}${c.page_b?' • Pg '+esc(c.page_b):''}</b><i>“${esc(c.quote_b)}”</i></div></div></div>`).join('');
+  }
+  if(!abst&&d.answer&&!(Array.isArray(d.claims)&&d.claims.length))h+=`<div class="claim">${esc(d.answer)}</div>`;
+  if(Array.isArray(d.claims)){
+    h+=d.claims.map(c=>{
+      const txt=typeof c==='string'?c:(c.claim??c.text??c.statement??'');
+      const doc=c.doc_name??c.doc??c.document,pg=c.page??c.page_number,qt=c.exact_quote??c.quote??'';
+      let cite='';
+      if(doc){const i=citeStore.push({doc,pg,qt})-1;cite=`<span class="cite" data-i="${i}" role="button" tabindex="0">📄 ${esc(doc)} • Pg ${esc(pg)}</span>`}
+      return `<div class="claim">${esc(txt)}${cite}</div>`;
+    }).join('');
+  }
+  const m=d.calculation??d.calculation_steps??d.math_steps??d.math;
+  if(m&&(!Array.isArray(m)||m.length))h+=`<div class="math"><h4>🧮 Calculation</h4>${esc(Array.isArray(m)?m.map(x=>typeof x==='object'?JSON.stringify(x):x).join('\n'):typeof m==='object'?JSON.stringify(m,null,2):m)}</div>`;
+  if(!abst&&!d.claims?.length&&!d.answer&&!d.contradictions?.length&&!d.amendment_note)h+=`<div class="claim">${esc(d.message||'No answer returned.')}</div>`;
+  return h;
+}
+chat.addEventListener('click',e=>{const c=e.target.closest('.cite');if(c)openProof(citeStore[c.dataset.i])});
+chat.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList?.contains('cite'))openProof(citeStore[e.target.dataset.i])});
+
+/* proof drawer */
+const dr=$('#drawer'),img=$('#dimg'),ds=$('#dstate');
+function openProof({doc,pg,qt}){
+  $('#dtitle').textContent=`${doc} • Page ${pg}`;
+  $('#dquote').innerHTML=qt?`<b>Verbatim quote</b><br>“${esc(qt)}”`:'';$('#dquote').style.display=qt?'block':'none';
+  img.style.display='none';ds.style.display='block';ds.innerHTML='<span class="spin"></span>Loading highlighted page…';
+  dr.classList.add('open');dr.setAttribute('aria-hidden','false');
+  const url=`${API()}/highlight?doc_name=${encodeURIComponent(doc)}&page=${encodeURIComponent(pg)}&quote=${encodeURIComponent(qt||'')}`;
+  img.onload=()=>{ds.style.display='none';img.style.display='block'};
+  img.onerror=()=>{ds.innerHTML='⚠️ Could not load the highlighted page. Is the backend running and does <code>/highlight</code> return an image?'};
+  img.src=url;
+}
+function closeDrawer(){dr.classList.remove('open');dr.setAttribute('aria-hidden','true')}
+$('#dclose').onclick=closeDrawer;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDrawer()});
+
+applyLang();renderDocs();
+})();
+</script>
+</body>
+</html>
