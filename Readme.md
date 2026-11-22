@@ -1,12 +1,12 @@
-# Tathya (तथ्य) – Zero-Guessing & Contradiction-Checking Document AI
+# Tathya (तथ्य) – Evidence-First Document Intelligence AI
 
 > **Don't Guess. Verify.**
 >
-> An evidence-first AI document assistant that answers only with verifiable proof.
+> An AI-powered document verification and investigation platform that turns multiple documents into traceable, evidence-backed answers.
 
 ![Project](https://img.shields.io/badge/Project-Tathya-blue)
 ![Track](https://img.shields.io/badge/Track-AI%2FML-purple)
-![Problem Statement](https://img.shields.io/badge/Problem-AIML--02--Option--B-orange)
+![Problem](https://img.shields.io/badge/Problem-AIML--02--Option--B-orange)
 ![Frontend](https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JavaScript-orange)
 ![Backend](https://img.shields.io/badge/Backend-Python%20%7C%20FastAPI-green)
 ![AI](https://img.shields.io/badge/AI-Open--Source%20Models-blue)
@@ -14,59 +14,35 @@
 
 ---
 
-## About Tathya
+# About Tathya
 
-**Tathya (तथ्य)** is a Sanskrit/Hindi word meaning *Fact* or *Truth*.
+**Tathya (तथ्य)** is a Sanskrit/Hindi word meaning **Fact or Truth**.
 
-Tathya is an AI-powered document intelligence system designed to analyse, verify and retrieve information from multiple PDF documents.
+Tathya is an AI-powered document intelligence platform designed to analyse, verify and investigate information across multiple PDF documents.
 
-Traditional AI chatbots can sometimes generate unsupported answers, overlook conflicting clauses or miss important information across multiple documents.
+Traditional AI chatbots can generate unsupported answers, overlook conflicting clauses, miss important information across documents or fail to identify changes introduced through amendments.
 
-Tathya addresses this problem through an evidence-first approach.
+Tathya addresses these challenges through an evidence-first verification approach.
 
-Instead of simply generating answers, Tathya retrieves relevant information, verifies supporting evidence, identifies contradictions and provides exact document citations.
+Instead of simply generating answers, Tathya aims to:
 
-When sufficient evidence is unavailable, Tathya abstains from answering instead of guessing.
+- Retrieve information from multiple documents.
+- Provide exact page-level citations.
+- Verify individual claims against original evidence.
+- Detect contradictions between documents.
+- Track document amendments and applicable clauses.
+- Abstain when sufficient evidence is unavailable.
+- Measure how much of an answer is supported by document evidence.
 
 ### Our Philosophy
 
 **No Proof, No Answer.**
 
-We believe AI should not just provide answers. It should also explain where those answers come from.
+We believe AI should not just provide answers. It should also prove where those answers come from.
 
 ---
 
-## Table of Contents
-
-1. [Problem Statement](#1-problem-statement)
-2. [Our Solution](#2-our-solution)
-3. [Key Features](#3-key-features)
-4. [How Tathya Works](#4-how-tathya-works)
-5. [System Architecture](#5-system-architecture)
-6. [Technology Stack](#6-technology-stack)
-7. [Project Structure](#7-project-structure)
-8. [Installation and Setup](#8-installation-and-setup)
-9. [Environment Configuration](#9-environment-configuration)
-10. [Running the Application](#10-running-the-application)
-11. [API Documentation](#11-api-documentation)
-12. [AI and Verification Pipeline](#12-ai-and-verification-pipeline)
-13. [Faithfulness Score](#13-faithfulness-score)
-14. [Contradiction Detection](#14-contradiction-detection)
-15. [Amendment Tracking](#15-amendment-tracking)
-16. [Deployment](#16-deployment)
-17. [Testing and Evaluation](#17-testing-and-evaluation)
-18. [Security and Privacy](#18-security-and-privacy)
-19. [Limitations](#19-limitations)
-20. [Team Members](#20-team-members)
-21. [Development Guidelines](#21-development-guidelines)
-22. [AI Tools Disclosure](#22-ai-tools-disclosure)
-23. [Future Scope](#23-future-scope)
-24. [Acknowledgements](#24-acknowledgements)
-25. [License](#25-license)
-
----
-
-## 1. Problem Statement
+# 1. Problem Statement
 
 **Hack-a-Sol 5.0 | Track 2: AI/ML | AIML-02 – Option B**
 
@@ -83,7 +59,7 @@ In high-stakes fields such as banking, insurance and public policy, organisation
 
 Traditional AI assistants can summarise documents but may overlook conflicting clauses, miss answers across multiple PDFs or generate information without sufficient evidence.
 
-This becomes a serious problem when users need accurate and verifiable information.
+This creates problems when users need accurate, traceable and verifiable information.
 
 ### Our Challenge
 
@@ -98,19 +74,19 @@ Build a verifiable Document AI system that:
 
 ---
 
-## 2. Our Solution
+# 2. Our Solution
 
 Tathya provides a unified document intelligence platform where users can upload multiple PDFs and ask questions using natural language.
 
-The system processes documents, extracts relevant information, retrieves supporting evidence and verifies proposed answers before presenting them.
+The application processes documents, extracts relevant information, retrieves supporting evidence and verifies proposed answers before displaying them.
 
-If multiple documents contain conflicting information, Tathya highlights the differences with supporting quotations.
+If multiple documents contain conflicting information, Tathya highlights the differences with their supporting quotations.
 
-If the available evidence is insufficient, Tathya clearly communicates the missing information instead of generating an unsupported response.
+If the available evidence is insufficient, Tathya clearly communicates what is missing instead of generating an unsupported response.
 
 ### Example Use Case
 
-Suppose a user uploads:
+Suppose a user uploads three documents:
 
 | Document | Description |
 |---|---|
@@ -133,198 +109,373 @@ Tathya will:
 
 ---
 
-## 3. Key Features
+# 3. Seven Core Features of Tathya
 
-### 3.1 Multi-Document Evidence Retrieval
+These seven capabilities define the core functionality of Tathya.
 
-- Upload multiple PDF documents.
-- Extract text page by page.
-- Extract tables and structured information.
-- Divide documents into meaningful chunks.
-- Generate semantic embeddings.
-- Search across multiple documents.
-- Retrieve relevant passages for user questions.
+## 3.1 Multiple Documents
 
-### 3.2 Exact Citations
+**Analyse multiple PDFs together instead of treating every document separately.**
 
-Every factual answer should include:
+Users can upload multiple PDF files and ask questions across the entire document collection.
 
-- Document name
-- Page number
-- Exact supporting quotation
-- Evidence reference
+Tathya will:
 
-Each claim should be linked to its supporting source.
+- Process multiple documents.
+- Extract text and tables.
+- Preserve document names and page numbers.
+- Generate searchable document representations.
+- Retrieve relevant evidence from different PDFs.
+- Combine information from multiple sources when answering questions.
 
-### 3.3 Contradiction Detection
+**Example:**
 
-Identify potentially conflicting information across different documents.
+Upload three loan agreements and ask:
 
-Example:
+"What are the differences in their eligibility requirements?"
 
-| Source | Statement |
+Tathya retrieves relevant clauses from all three documents.
+
+## 3.2 Exact Citations
+
+**Every factual answer must point to its original source.**
+
+Tathya provides:
+
+- Document name.
+- Exact page number.
+- Original supporting quotation.
+- Evidence reference.
+
+**Example:**
+
+```text
+Answer:
+The interest rate mentioned is 8%.
+
+Source:
+Loan_Agreement.pdf
+
+Page:
+5
+
+Supporting Evidence:
+"The applicable interest rate shall be 8%."
+```
+
+Users can trace the answer back to the original document.
+
+## 3.3 Zero Guessing
+
+**If evidence is unavailable, Tathya does not invent an answer.**
+
+If a question cannot be answered using the uploaded documents, Tathya communicates that sufficient evidence is unavailable.
+
+Possible responses:
+
+- Verified Answer
+- Insufficient Evidence
+- Conflicting Information
+- No Confident Match
+
+**Example:**
+
+Question: "What is the processing fee?"
+
+If the uploaded documents do not mention the processing fee:
+
+```text
+I don't have sufficient evidence
+to answer this question.
+
+No supporting clause was found
+in the uploaded documents.
+```
+
+## 3.4 Claim Verification
+
+**Verify every individual statement instead of trusting the complete AI-generated answer.**
+
+Tathya divides an answer into individual factual claims and checks each claim against its supporting document evidence.
+
+**Example:**
+
+AI-generated answer:
+
+"The loan amount is ₹5 lakh and the interest rate is 8%."
+
+Verification:
+
+| Claim | Result |
 |---|---|
-| Policy A | Minimum eligibility age is 18 |
-| Policy B | Minimum eligibility age is 21 |
+| Loan amount is ₹5 lakh | Verified |
+| Interest rate is 8% | Verified |
 
-Tathya displays both statements with their original citations.
+If a claim is unsupported or contradicted, Tathya flags it instead of presenting it as verified.
 
-The system should distinguish genuine contradictions from differences caused by conditions, dates or document scope.
+## 3.5 Contradiction Detection
 
-### 3.4 Amendment Chain Tracking
+**Identify conflicting information across different documents.**
 
-Track relationships between original documents and their amendments.
+Tathya compares relevant clauses, values, dates and conditions to identify potential contradictions.
+
+**Example:**
+
+| Document A | Document B |
+|---|---|
+| Minimum age: 18 years | Minimum age: 21 years |
+
+Result:
+
+```text
+Potential Contradiction Detected
+
+Document A:
+Minimum age = 18 years
+
+Document B:
+Minimum age = 21 years
+
+Status:
+Conflicting evidence found.
+```
+
+Both original statements and their citations remain visible.
+
+The system must distinguish genuine contradictions from differences caused by conditions, dates or document scope.
+
+## 3.6 Amendment Tracking
+
+**Understand how document rules and clauses change over time.**
+
+Tathya tracks relationships between original documents and their amendments.
 
 Example:
 
-Original Policy → First Amendment → Second Amendment
+```text
+Original Policy
+       |
+       v
+First Amendment
+       |
+       v
+Second Amendment
+```
 
-Analyse:
+It analyses:
 
-- Amendment references
-- Effective dates
-- Replaced clauses
-- Modified conditions
-- Document relationships
+- Amendment references.
+- Effective dates.
+- Modified clauses.
+- Replaced conditions.
+- Document relationships.
+- Applicable versions, where evidence supports the conclusion.
 
 Tathya must not automatically assume that the newest uploaded document is the applicable version.
 
-### 3.5 Zero-Guessing Abstention
+If applicability cannot be established, it reports uncertainty.
 
-Tathya must not generate answers when evidence is insufficient.
+## 3.7 Faithfulness Score
 
-Possible response statuses:
+**Measure how much of an AI-generated answer is supported by document evidence.**
 
-- Verified Answer
-- Conflict Detected
-- Insufficient Evidence
-- No Confident Answer
+Tathya calculates the percentage of answer sentences supported by at least one matching source quotation.
 
-Unsupported claims should be blocked rather than presented as facts.
+Formula:
 
-### 3.6 Faithfulness Score
+```text
+Faithfulness Score =
 
-Calculate the percentage of answer sentences supported by at least one matching source quotation.
+(Supported Answer Sentences /
+ Total Answer Sentences) × 100
+```
 
 Example:
 
-- Total answer sentences: 10
-- Supported sentences: 8
-- Faithfulness score: 80%
+```text
+Total Answer Sentences: 10
 
-### 3.7 Bonus Features
+Supported Sentences: 9
 
-Planned additional features:
+Unsupported Sentences: 1
 
-- Highlight cited passages on rendered PDF pages.
-- Support Hindi questions and answers.
-- Perform calculations based on document clauses, such as EMI and penalties, with working shown.
+Faithfulness Score: 90%
+```
+
+The score will be based on evidence verification rather than the language model's self-assessment.
 
 ---
 
-## 4. How Tathya Works
+# 4. What Makes Tathya Different?
+
+Tathya is not intended to be just another PDF chatbot.
+
+Most document assistants focus primarily on searching, summarising and answering questions from uploaded documents.
+
+Tathya aims to extend this workflow into document investigation and answer verification.
+
+### Traditional PDF Chatbot vs Tathya
+
+| Capability | Traditional PDF Chatbot | Tathya |
+|---|---|---|
+| PDF Question Answering | Yes | Yes |
+| Multiple Document Analysis | Varies by product | Core feature |
+| Exact Source Citations | Varies by product | Core feature |
+| Individual Claim Verification | Not always available | Core feature |
+| Evidence-Based Abstention | Not guaranteed | Core feature |
+| Contradiction Investigation | Not always available | Core feature |
+| Amendment Relationship Tracking | Not always available | Core feature |
+| Faithfulness Measurement | Not always available | Core feature |
+| Evidence-Based Reports | Varies by product | Planned feature |
+
+*This is a high-level product positioning comparison, not a claim that every competing product lacks these capabilities.*
+
+## Our Five Key Differentiators
+
+### 1. From Answer Generation to Answer Verification
+
+Traditional AI workflows often focus on generating answers.
+
+Tathya focuses on checking whether individual claims are actually supported by the source documents.
+
+### 2. From Document Search to Document Investigation
+
+Tathya aims to connect information across multiple documents instead of simply retrieving isolated passages.
+
+### 3. From Conflict Identification to Amendment Intelligence
+
+Identifying different statements is only the first step.
+
+Tathya aims to investigate their relationships, amendment references and effective dates to determine which clauses may apply.
+
+### 4. From AI Confidence to Evidence-Based Faithfulness
+
+An AI model sounding confident does not make its answer correct.
+
+Tathya uses source-backed verification to calculate how much of an answer is supported by evidence.
+
+### 5. From Black-Box Answers to Transparent Results
+
+Users should be able to inspect:
+
+- What the AI answered.
+- Which claims were verified.
+- Which documents were used.
+- Which pages contain the evidence.
+- What conflicts were detected.
+- Why the system abstained.
+
+### Our Core Difference
+
+**Tathya does not simply aim to tell users what a document says. It aims to establish what the available evidence supports, where documents disagree and what remains unverified.**
+
+---
+
+# 5. How Tathya Works
 
 Tathya follows an evidence-first processing pipeline.
 
-1. **Document Upload:** Users upload PDF documents.
+1. **Document Upload:** Users upload multiple PDF documents.
 2. **PDF Processing:** Extract text, tables and page information.
 3. **Text Chunking:** Divide extracted content into meaningful sections.
 4. **Embedding Generation:** Convert text into numerical vector representations.
 5. **Evidence Retrieval:** Retrieve relevant passages across multiple PDFs.
-6. **Answer Generation:** Generate a proposed answer using retrieved evidence.
-7. **Evidence Verification:** Check every proposed claim against its supporting source.
+6. **Answer Generation:** Generate proposed answers using retrieved evidence.
+7. **Claim Verification:** Check individual claims against their sources.
 8. **Contradiction Detection:** Identify potentially conflicting clauses.
 9. **Amendment Analysis:** Evaluate document relationships and applicability.
-10. **Final Response:** Return verified information, citations, a faithfulness score or an abstention message.
+10. **Faithfulness Calculation:** Calculate the evidence-supported answer percentage.
+11. **Final Response:** Return verified information, citations, conflicts, a faithfulness score or an abstention message.
 
 ---
 
-## 5. System Architecture
+# 6. System Architecture
 
 ```text
-                    USER
-                      |
-                      v
-        +---------------------------+
-        |         FRONTEND          |
-        |                           |
-        |       GitHub Pages        |
-        |                           |
-        |         HTML5             |
-        |         CSS3              |
-        |    Vanilla JavaScript     |
-        +-------------+-------------+
-                      |
-                      | HTTPS REST API
-                      |
-                      v
-        +---------------------------+
-        |         BACKEND           |
-        |                           |
-        |          Render           |
-        |                           |
-        |         FastAPI           |
-        +-------------+-------------+
-                      |
-          +-----------+-----------+
-          |                       |
-          v                       v
-  +---------------+       +---------------+
-  | PDF PROCESSOR |       |   DATABASE    |
-  |               |       |               |
-  | PyMuPDF       |       | SQLite        |
-  | pdfplumber    |       | SQLAlchemy    |
-  +-------+-------+       +---------------+
-          |
-          v
-  +---------------------------+
-  |       RAG PIPELINE        |
-  |                           |
-  | Text Chunking             |
-  | Sentence Transformers     |
-  | FAISS Retrieval           |
-  +-------------+-------------+
-                |
-                v
-  +---------------------------+
-  |        AI ENGINE          |
-  |                           |
-  | Open-Source LLM           |
-  | Compatible Model Runtime  |
-  +-------------+-------------+
-                |
-                v
-  +---------------------------+
-  |    VERIFICATION ENGINE    |
-  |                           |
-  | Evidence Verification     |
-  | Citation Validation       |
-  | Contradiction Detection   |
-  | Amendment Tracking        |
-  | Faithfulness Calculation  |
-  +-------------+-------------+
-                |
-                v
-  +---------------------------+
-  |      FINAL RESPONSE       |
-  |                           |
-  | Verified Answer           |
-  | Exact Citations           |
-  | Faithfulness Score        |
-  | Conflict Alerts           |
-  | Abstention                |
-  +---------------------------+
+                      USER
+                        |
+                        v
+          +---------------------------+
+          |         FRONTEND          |
+          |                           |
+          |       GitHub Pages        |
+          |                           |
+          |         HTML5             |
+          |         CSS3              |
+          |    Vanilla JavaScript     |
+          +-------------+-------------+
+                        |
+                        | HTTPS REST API
+                        |
+                        v
+          +---------------------------+
+          |         BACKEND           |
+          |                           |
+          |          Render           |
+          |                           |
+          |         FastAPI           |
+          +-------------+-------------+
+                        |
+             +----------+----------+
+             |                     |
+             v                     v
+     +---------------+     +---------------+
+     | PDF PROCESSOR |     |   DATABASE    |
+     |               |     |               |
+     | PyMuPDF       |     | SQLite        |
+     | pdfplumber    |     | SQLAlchemy    |
+     +-------+-------+     +---------------+
+             |
+             v
+     +---------------------------+
+     |       RAG PIPELINE        |
+     |                           |
+     | Text Chunking             |
+     | Sentence Transformers     |
+     | FAISS Retrieval           |
+     +-------------+-------------+
+                   |
+                   v
+     +---------------------------+
+     |        AI ENGINE          |
+     |                           |
+     | Open-Source LLM           |
+     | Compatible Model Runtime  |
+     +-------------+-------------+
+                   |
+                   v
+     +---------------------------+
+     |    VERIFICATION ENGINE    |
+     |                           |
+     | Evidence Verification     |
+     | Citation Validation       |
+     | Claim Verification        |
+     | Contradiction Detection   |
+     | Amendment Tracking        |
+     | Faithfulness Calculation  |
+     +-------------+-------------+
+                   |
+                   v
+     +---------------------------+
+     |      FINAL RESPONSE       |
+     |                           |
+     | Verified Answer           |
+     | Exact Citations           |
+     | Faithfulness Score        |
+     | Conflict Alerts           |
+     | Abstention                |
+     +---------------------------+
 ```
 
 ---
 
-## 6. Technology Stack
+# 7. Technology Stack
 
 | Component | Technology | Purpose |
 |---|---|---|
 | Frontend | HTML5 | Application structure |
 | Styling | CSS3 | User interface |
-| Frontend Logic | Vanilla JavaScript | Interactions and API requests |
+| Frontend Logic | Vanilla JavaScript | API requests and interactions |
 | Frontend Hosting | GitHub Pages | Static hosting |
 | Backend | Python | Application logic |
 | API Framework | FastAPI | REST APIs |
@@ -333,8 +484,8 @@ Tathya follows an evidence-first processing pipeline.
 | Table Extraction | pdfplumber | Table extraction |
 | Embeddings | Sentence Transformers | Semantic representations |
 | Vector Search | FAISS | Evidence retrieval |
-| LLM | Open-source model | Answer generation |
-| Model Runtime | Ollama / compatible runtime | Model inference |
+| LLM | Open-Source Model | Answer generation |
+| Model Runtime | Ollama / Compatible Runtime | Model inference |
 | Database | SQLite | Application metadata |
 | ORM | SQLAlchemy | Database operations |
 | Validation | Pydantic | Input and output validation |
@@ -342,11 +493,11 @@ Tathya follows an evidence-first processing pipeline.
 
 All selected models, libraries and datasets will be reviewed for licence compatibility.
 
-**AI API Policy:** The AIML-02 problem requires the complete pipeline to run on open-source models without paid AI APIs. Tathya will follow this requirement.
+**AI API Policy:** The selected AIML-02 problem requires the complete pipeline to run on open-source models without paid AI APIs. Tathya will follow this requirement.
 
 ---
 
-## 7. Project Structure
+# 8. Project Structure
 
 ```text
 tathya/
@@ -366,6 +517,7 @@ tathya/
 │   │   │   ├── dashboard.js
 │   │   │   ├── documents.js
 │   │   │   ├── chat.js
+│   │   │   ├── claims.js
 │   │   │   ├── conflicts.js
 │   │   │   ├── amendments.js
 │   │   │   └── pdf-viewer.js
@@ -382,6 +534,7 @@ tathya/
 │   │   ├── api/
 │   │   │   ├── documents.py
 │   │   │   ├── chat.py
+│   │   │   ├── claims.py
 │   │   │   ├── conflicts.py
 │   │   │   ├── amendments.py
 │   │   │   ├── reports.py
@@ -401,6 +554,7 @@ tathya/
 │   │   │   ├── evidence_engine.py
 │   │   │   ├── citation_engine.py
 │   │   │   ├── verification_engine.py
+│   │   │   ├── claim_engine.py
 │   │   │   ├── contradiction_engine.py
 │   │   │   ├── amendment_engine.py
 │   │   │   └── faithfulness_engine.py
@@ -441,21 +595,19 @@ tathya/
 
 ---
 
-## 8. Installation and Setup
+# 9. Installation and Setup
 
 ### Prerequisites
 
-Install:
-
 - Python 3.11
 - Git
-- Ollama or another compatible open-source model runtime
-- A compatible open-source language model
-- A compatible embedding model
+- Ollama or compatible open-source model runtime
+- Compatible open-source language model
+- Compatible embedding model
 
 Node.js is not required for the Vanilla JavaScript frontend.
 
-### Step 1: Clone the Repository
+### Step 1: Clone Repository
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/tathya.git
@@ -499,7 +651,7 @@ Example:
 ollama pull llama3.2:1b
 ```
 
-Start the local model runtime:
+Start the model runtime:
 
 ```bash
 ollama serve
@@ -507,7 +659,7 @@ ollama serve
 
 The final model will be selected after testing hardware compatibility, inference quality and licence requirements.
 
-### Step 4: Environment Configuration
+### Step 4: Configure Environment Variables
 
 Create a `.env` file using `.env.example`.
 
@@ -531,9 +683,9 @@ http://127.0.0.1:8000/docs
 
 ---
 
-## 9. Environment Configuration
+# 10. Environment Configuration
 
-Example backend `.env.example`:
+Example `.env.example`:
 
 ```env
 APP_NAME=Tathya
@@ -562,11 +714,11 @@ These are example development settings.
 
 Production settings must be configured separately.
 
-Never commit actual secrets, API credentials or private environment files to GitHub.
+Never commit actual credentials or private environment files to GitHub.
 
 ---
 
-## 10. Running the Application
+# 11. Running the Application
 
 ### Start Backend
 
@@ -586,7 +738,7 @@ cd frontend
 python -m http.server 5500
 ```
 
-Open the application:
+Open:
 
 ```text
 http://localhost:5500
@@ -596,7 +748,7 @@ The frontend communicates with the backend through JavaScript Fetch API requests
 
 ---
 
-## 11. API Documentation
+# 12. API Documentation
 
 The following endpoints are planned for the application.
 
@@ -607,6 +759,7 @@ The following endpoints are planned for the application.
 | GET | `/api/documents/{id}` | Get document details |
 | DELETE | `/api/documents/{id}` | Delete a document |
 | POST | `/api/chat/ask` | Ask questions |
+| GET | `/api/claims/{id}` | Retrieve claim verification |
 | GET | `/api/conflicts` | Retrieve detected conflicts |
 | GET | `/api/amendments` | Retrieve amendment chains |
 | GET | `/api/reports/{id}` | Retrieve analysis reports |
@@ -649,13 +802,13 @@ The following endpoints are planned for the application.
 }
 ```
 
-*Note: These are illustrative API contracts. Final response fields may change during implementation.*
+*These are illustrative API contracts. Final response fields may change during implementation.*
 
 ---
 
-## 12. AI and Verification Pipeline
+# 13. AI and Verification Pipeline
 
-### 12.1 PDF Extraction
+### 13.1 PDF Extraction
 
 PyMuPDF extracts text page by page.
 
@@ -663,45 +816,49 @@ pdfplumber handles table extraction.
 
 The system preserves document metadata and page references.
 
-### 12.2 Text Chunking
+### 13.2 Text Chunking
 
 Extracted content is divided into smaller meaningful sections.
 
 Each chunk maintains its original document ID and page number.
 
-### 12.3 Embedding Generation
+### 13.3 Embedding Generation
 
 Sentence Transformers converts document chunks and user questions into numerical vector representations.
 
-### 12.4 Evidence Retrieval
+### 13.4 Evidence Retrieval
 
 FAISS retrieves relevant chunks based on semantic similarity.
 
-Keyword retrieval will also be used for exact figures, dates and clause references.
+Keyword retrieval can also be used for exact figures, dates and clause references.
 
-### 12.5 Answer Generation
+### 13.5 Answer Generation
 
 The language model receives the user question and retrieved evidence.
 
-It generates proposed claims with references to the retrieved evidence.
+It generates proposed claims with references to supporting evidence.
 
-### 12.6 Evidence Verification
+### 13.6 Claim Verification
 
-The verification engine checks:
+The verification engine:
 
-1. Whether the cited evidence exists.
-2. Whether the quotation matches the original document.
-3. Whether the evidence supports the proposed claim.
-4. Whether conflicting evidence exists.
-5. Whether sufficient proof is available.
+1. Separates the answer into factual claims.
+2. Identifies supporting evidence for each claim.
+3. Checks source and quotation references.
+4. Evaluates whether the evidence supports the claim.
+5. Flags unsupported or conflicting claims.
 
-Only verified claims are eligible for the final response.
+### 13.7 Final Verification
+
+The system checks whether the complete response meets the evidence requirements.
+
+It returns verified claims, conflicts, abstention messages and the faithfulness score.
 
 ---
 
-## 13. Faithfulness Score
+# 14. Faithfulness Score
 
-The faithfulness score measures how much of the generated answer is supported by document evidence.
+The faithfulness score measures the percentage of answer sentences supported by at least one matching source quotation.
 
 Formula:
 
@@ -717,29 +874,29 @@ Example:
 ```text
 Total sentences: 10
 
-Supported sentences: 8
+Supported sentences: 9
 
-Faithfulness Score: 80%
+Faithfulness Score: 90%
 ```
 
-The score will be calculated using claim-level evidence mappings, not the language model's self-assessment.
+The score is calculated using claim-level evidence mappings rather than the language model's self-assessment.
 
-Unsupported claims will be identified and blocked according to the verification policy.
+A high score does not automatically establish that a document is legally correct or that all relevant evidence was retrieved.
 
 ---
 
-## 14. Contradiction Detection
+# 15. Contradiction Detection
 
 The contradiction engine compares relevant statements across documents.
 
 It evaluates:
 
-- Subject and clause context
-- Numerical values
-- Dates
-- Conditions
-- Document scope
-- Supporting quotations
+- Subject and clause context.
+- Numerical values.
+- Dates.
+- Conditions.
+- Document scope.
+- Supporting quotations.
 
 Example:
 
@@ -754,13 +911,13 @@ Result:
 Potential contradiction detected.
 ```
 
-The application displays both statements and their citations.
+The application displays both statements and their original citations.
 
 It must distinguish actual contradictions from statements that apply under different conditions.
 
 ---
 
-## 15. Amendment Tracking
+# 16. Amendment Tracking
 
 The amendment engine identifies relationships between original documents and their amendments.
 
@@ -778,25 +935,55 @@ Second Amendment
 
 It analyses:
 
-- Amendment references
-- Effective dates
-- Modified clauses
-- Replaced conditions
-- Document relationships
+- Amendment references.
+- Effective dates.
+- Modified clauses.
+- Replaced conditions.
+- Document relationships.
 
-The system evaluates which rule applies using the available amendment evidence.
+The system evaluates applicability using the available evidence.
 
-If applicability cannot be established, Tathya reports uncertainty instead of assuming the newest uploaded document is automatically valid.
+If the documents do not establish which version applies, Tathya reports uncertainty instead of automatically selecting the newest document.
 
 ---
 
-## 16. Deployment
+# 17. Testing and Evaluation
+
+Tathya will be tested using documents with known answers, conflicting clauses and amendment relationships.
+
+### Functional Testing
+
+| Test Case | Expected Result |
+|---|---|
+| Upload a valid PDF | Document processed |
+| Upload multiple PDFs | All documents indexed |
+| Ask a supported question | Answer with citations |
+| Ask an unsupported question | Safe abstention |
+| Upload conflicting clauses | Conflict alert |
+| Upload amendment documents | Amendment relationships identified |
+| Verify page references | Correct source pages |
+| Calculate faithfulness | Evidence-based percentage |
+
+### Evaluation Metrics
+
+- Retrieval Precision@K
+- Retrieval Recall@K
+- Citation Accuracy
+- Claim Verification Accuracy
+- Contradiction Detection Precision and Recall
+- Amendment Relationship Accuracy
+- Abstention Accuracy
+- Average Response Time
+
+Actual evaluation results will be added after testing.
+
+---
+
+# 18. Deployment
 
 ### Frontend – GitHub Pages
 
 The frontend is a static HTML, CSS and JavaScript application.
-
-Deployment steps:
 
 1. Push frontend code to GitHub.
 2. Open repository Settings.
@@ -813,8 +1000,6 @@ https://YOUR_USERNAME.github.io/tathya/
 ### Backend – Render
 
 The Python FastAPI backend will be deployed using Render.
-
-Deployment steps:
 
 1. Connect the GitHub repository to Render.
 2. Configure the backend directory as the service root.
@@ -842,48 +1027,14 @@ https://YOUR-BACKEND-NAME.onrender.com
 - Render must have access to the selected model inference runtime.
 - A model running on a developer's laptop will not automatically be accessible to the deployed backend.
 - Free hosting plans have compute and storage limitations.
-- SQLite databases, uploaded PDFs and FAISS indexes require appropriate persistent or external storage.
+- Uploaded PDFs, databases and FAISS indexes need appropriate persistent or external storage.
 - Model memory requirements and inference performance must be tested before final deployment.
 
-The complete AI pipeline must remain based on open-source models without paid AI APIs.
+The complete AI pipeline must use open-source models without paid AI APIs.
 
 ---
 
-## 17. Testing and Evaluation
-
-Tathya will be tested using documents with known answers, conflicting clauses and amendment relationships.
-
-### Functional Testing
-
-| Test Case | Expected Result |
-|---|---|
-| Upload a valid PDF | Document processed |
-| Upload multiple PDFs | All documents indexed |
-| Ask a supported question | Answer with citations |
-| Ask an unsupported question | Safe abstention |
-| Upload conflicting clauses | Conflict alert |
-| Upload amendment documents | Amendment relationships identified |
-| Verify page references | Correct source pages |
-| Calculate faithfulness | Evidence-based percentage |
-
-### Evaluation Metrics
-
-We will evaluate:
-
-- Retrieval Precision@K
-- Retrieval Recall@K
-- Citation Accuracy
-- Claim Verification Accuracy
-- Contradiction Detection Precision and Recall
-- Amendment Relationship Accuracy
-- Abstention Accuracy
-- Average Response Time
-
-Actual evaluation results will be added after testing.
-
----
-
-## 18. Security and Privacy
+# 19. Security and Privacy
 
 Tathya is designed with responsible document processing in mind.
 
@@ -905,7 +1056,7 @@ Public demonstration datasets should contain public, licensed or self-collected 
 
 ---
 
-## 19. Limitations
+# 20. Limitations
 
 Tathya may have limitations when processing:
 
@@ -922,7 +1073,7 @@ Tathya provides document-based evidence analysis. It does not replace legal, fin
 
 ---
 
-## 20. Team Members
+# 21. Team Members
 
 **Team Size: 3 Members**
 
@@ -930,7 +1081,7 @@ Tathya provides document-based evidence analysis. It does not replace legal, fin
 |---|---|
 | Member 1 | Frontend Development – HTML, CSS, JavaScript |
 | Member 2 | Backend Development – Python, FastAPI, PDF Processing and RAG |
-| Member 3 | AI/ML Development – Verification, Contradiction Detection and Amendment Tracking |
+| Member 3 | AI/ML Development – Claim Verification, Contradiction Detection and Amendment Tracking |
 
 ### Team Details
 
@@ -940,7 +1091,7 @@ Tathya provides document-based evidence analysis. It does not replace legal, fin
 
 ---
 
-## 21. Development Guidelines
+# 22. Development Guidelines
 
 We follow a modular development approach.
 
@@ -960,7 +1111,7 @@ git checkout -b feature/your-feature
 
 git add .
 
-git commit -m "Add document processing module"
+git commit -m "Add document verification module"
 
 git push origin feature/your-feature
 ```
@@ -969,11 +1120,11 @@ Changes should be reviewed and merged into the main branch.
 
 ---
 
-## 22. AI Tools Disclosure
+# 23. AI Tools Disclosure
 
 AI-assisted development tools may be used during development.
 
-All tools actually used must be disclosed in the final submission in accordance with the hackathon rules.
+All tools actually used must be disclosed in the final submission according to the hackathon rules.
 
 The team is responsible for:
 
@@ -987,7 +1138,7 @@ The final disclosure will list the actual tools used by the team.
 
 ---
 
-## 23. Future Scope
+# 24. Future Scope
 
 Potential improvements include:
 
@@ -1003,7 +1154,7 @@ Potential improvements include:
 
 ---
 
-## 24. Acknowledgements
+# 25. Acknowledgements
 
 Developed for **Hack-a-Sol 5.0 – Track 2: AI/ML, AIML-02 Option B**.
 
@@ -1013,7 +1164,7 @@ All third-party dependencies, models and datasets will be credited in the final 
 
 ---
 
-## 25. License
+# License
 
 This project is intended to use the MIT License, subject to the team's final licensing decision.
 
@@ -1027,7 +1178,7 @@ Third-party libraries, models and datasets remain subject to their respective li
 
 ### Don't Guess. Verify.
 
-**Making AI answers accountable through evidence.**
+**From documents to evidence. From answers to verification.**
 
 Built with a focus on accuracy, transparency and responsible AI.
 
