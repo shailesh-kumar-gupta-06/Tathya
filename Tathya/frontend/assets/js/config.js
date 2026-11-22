@@ -1,8 +1,5 @@
-// Tathya frontend configuration.
-// USE_MOCK = true  -> runs entirely in the browser with labelled sample data (no backend needed).
-// USE_MOCK = false -> calls the FastAPI backend at API_BASE.
+// Tathya frontend configuration (real backend only; no sample data).
 window.TATHYA_CONFIG = {
-  USE_MOCK: true,
-  API_BASE: "http://127.0.0.1:8000",   // change to https://YOUR-BACKEND.onrender.com after deploying
+  API_BASE: "http://127.0.0.1:8000",   // after deploying, change to https://YOUR-BACKEND.onrender.com
   MAX_MB: 20
 };
