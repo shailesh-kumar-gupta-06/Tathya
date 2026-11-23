@@ -8,6 +8,18 @@ from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 from . import config, conflicts as cf, llm, pdf_parser, pipeline, retrieval
 from .db import Chunk, Document, Page, SessionLocal, get_db, init_db
+from fastapi.middleware.cors import CORSMiddleware
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "https://shailesh-kumar-gupta-06.github.io",
+        "http://localhost:5500",
+        "http://127.0.0.1:5500",
+    ],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 def _index(db, doc_id, pages):
