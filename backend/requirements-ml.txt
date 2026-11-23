@@ -1,4 +1,0 @@
-# Optional: dense retrieval (set EMBEDDINGS=true). Needs ~1.5 GB RAM; do not use on Render free.
-numpy
-sentence-transformers
-faiss-cpu
