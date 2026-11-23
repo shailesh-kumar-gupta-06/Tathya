@@ -50,7 +50,7 @@ async def lifespan(app):
 
 
 app = FastAPI(title="Tathya API", version="1.0.0", lifespan=lifespan)
-app.add_middleware(CORSMiddleware, allow_origins=config.ALLOWED_ORIGINS, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=["https://shailesh-kumar-gupta-06.github.io"], allow_methods=["*"], allow_headers=["*"])
 
 
 def _doc(d: Document):
